@@ -16,7 +16,7 @@ lint:
 > $(VENV)/bin/ruff check .
 
 run:
-> PYTHONPATH=src $(PYTHON) -m confgen
+> @PYTHONPATH=src $(PYTHON) -m confgen
 
 clean:
 > find . -name "__pycache__" -type d -prune -exec rm -rf {} +
