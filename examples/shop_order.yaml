@@ -1,0 +1,11 @@
+store: Книжный мир
+items:
+- title: Книга
+  price: 1500.0
+  quantity: 2.0
+- title: Закладка
+  price: 50.0
+  quantity: 10.0
+subtotal: 3500.0
+discount: 350.0
+total: 3937.5
