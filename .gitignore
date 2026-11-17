@@ -1,0 +1,34 @@
+# Python (Г3)
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.venv/
+venv/
+
+# Артефакты сборки (Г4)
+build/
+dist/
+*.egg-info/
+
+# Архивы (Г1)
+*.zip
+*.tar
+*.tar.gz
+*.rar
+*.7z
+
+# Бинарные файлы (Г2)
+*.exe
+*.dll
+*.so
+*.bin
+
+# Настройки редакторов (Г5)
+.vscode/
+.idea/
+*.swp
+*~
