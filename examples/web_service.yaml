@@ -1,0 +1,11 @@
+name: shop-api
+port: 8080.0
+adminPort: 8090.0
+workerCount: 8.0
+memoryPerWorkerMb: 128.0
+limits:
+  maxConnections: 400.0
+  timeoutSeconds: 30.0
+hosts:
+- api.example.com
+- backup.example.com
