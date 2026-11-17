@@ -1,0 +1,67 @@
+// Грамматика учебного конфигурационного языка (вариант 21).
+
+start: const_decl* value
+
+const_decl: _LET NAME _EQ value
+
+?value: NUMBER -> number
+      | STRING -> string
+      | array
+      | dict
+      | expr
+
+array: _LARR (value (_COMMA value)*)? _RPAR
+
+dict: _BEGIN dict_entry* _END
+dict_entry: NAME _ASSIGN value _SEMI
+
+expr: _LEXPR sum _RBRACK
+
+?sum: sum _PLUS product -> add
+    | sum _MINUS product -> sub
+    | product
+
+?product: product _STAR atom -> mul
+        | product _SLASH atom -> div
+        | atom
+
+?atom: NUMBER -> number
+     | NAME -> var
+     | call
+     | _LPAR sum _RPAR
+
+call: _MIN _LPAR sum (_COMMA sum)* _RPAR
+
+NUMBER: /[+-]?\d+\.?\d*[eE][+-]?\d+/
+STRING: /@"[^"]*"/
+NAME: /[_a-zA-Z]+/
+
+_LET: "let"
+_BEGIN: "begin"
+_END: "end"
+_MIN: "min"
+_ASSIGN: ":="
+_EQ: "="
+_SEMI: ";"
+_COMMA: ","
+_LARR: "#("
+_LEXPR: "^["
+_RBRACK: "]"
+_LPAR: "("
+_RPAR: ")"
+_PLUS: "+"
+_MINUS: "-"
+_STAR: "*"
+_SLASH: "/"
+
+// Однострочный комментарий: только в начале строки (после отступа),
+// иначе "*" внутри выражения является умножением.
+LINE_COMMENT.2: /(?<![^\n])[ \t]*\*[^\n]*/
+BLOCK_COMMENT: /\{\{![\s\S]*?\}\}/
+NEWLINE: /\r?\n/
+SPACES: /[ \t]+/
+
+%ignore LINE_COMMENT
+%ignore BLOCK_COMMENT
+%ignore NEWLINE
+%ignore SPACES
