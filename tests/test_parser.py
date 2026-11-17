@@ -216,3 +216,10 @@ def test_invalid_character():
     with pytest.raises(ConfigSyntaxError) as info:
         parse("begin a := 1e0; ? end")
     assert "недопустимый символ" in info.value.message
+
+
+def test_error_lists_only_accepted_tokens():
+    """Сообщение называет только реально допустимые токены."""
+    with pytest.raises(ConfigSyntaxError) as info:
+        parse("begin a := 1e0 end")
+    assert info.value.message.endswith("ожидалось: ';'")

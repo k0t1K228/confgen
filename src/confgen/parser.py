@@ -61,7 +61,7 @@ def _token_error(err: UnexpectedToken) -> ConfigSyntaxError:
         found = "неожиданный конец ввода"
     else:
         found = f"неожиданный токен '{err.token}'"
-    expected = _describe_expected(err.expected)
+    expected = _describe_expected(err.accepts or err.expected)
     message = f"{found}, ожидалось: {expected}"
     return ConfigSyntaxError(message, err.line, err.column)
 
