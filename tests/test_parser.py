@@ -2,7 +2,8 @@
 
 import pytest
 
-from confgen.parser import ConfigSyntaxError, parse
+from confgen.errors import ConfigSyntaxError
+from confgen.parser import parse
 
 SECOND_LINE = 2
 

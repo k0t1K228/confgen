@@ -9,6 +9,8 @@ from lark.exceptions import (
     UnexpectedToken,
 )
 
+from confgen.errors import ConfigSyntaxError
+
 GRAMMAR_PATH = Path(__file__).with_name("grammar.lark")
 
 END_OF_INPUT = "$END"
@@ -38,22 +40,12 @@ TERMINAL_NAMES = {
 }
 
 
-class ConfigSyntaxError(Exception):
-    """Синтаксическая ошибка во входном тексте."""
-
-    def __init__(self, message: str, line: int, column: int) -> None:
-        """Сохраняет текст ошибки и её позицию во входном тексте."""
-        super().__init__(f"строка {line}, столбец {column}: {message}")
-        self.message = message
-        self.line = line
-        self.column = column
-
-
 _PARSER = Lark.open(
     str(GRAMMAR_PATH),
     parser="lalr",
     start="start",
     maybe_placeholders=False,
+    propagate_positions=True,
 )
 
 
